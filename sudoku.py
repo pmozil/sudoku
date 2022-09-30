@@ -1,6 +1,10 @@
 from random import sample, randint
 
 CLEAR = "\033[2J"
+RED = "\033[0;031m"
+GREEN = "\033[0;32m"
+BLUE = "\033[1;34m"
+RESET = "\033[0;0m"
 
 class Tile:
     """
@@ -229,14 +233,14 @@ class Grid:
                 # These weird characters set the colour of the number
                 if j.preset:
                     # If j is preset, then make it red
-                    print("\033[0;31m", end='')
+                    print(RED, end='')
                 else:
                     # Else, make j blue
                     print("\033[0;34m", end='')
                 # Print j itself
                 print(j.ch + ' ', end='')
                 # Reset the colours
-                print("\033[0;0m", end='')
+                print(RESET, end='')
 
             print('|\n' + '-' * (self.size * 4 + 1))
 
@@ -244,7 +248,7 @@ class Grid:
         """
         Print the solved board
         """
-        print("\033[1;34m", end='')
+        print(BLUE, end='')
         print("Too hard? Poor you. Here's a pity kitty")
         print(
         '''
@@ -256,20 +260,20 @@ class Grid:
             
     ( Credits to https://ascii.co.uk/art/cats)
         ''')
-        print("\033[0;0m", end='')
+        print(RESET, end='')
         print('-' * (self.size * 4 + 1))
         for i in range(self.size):
             for j in range(self.size):
                 print('| ', end='')
                 # These weird characters set the colour of the number
                 if self.board[i][j].preset:
-                    print("\033[0;31m", end='')
+                    print(RED, end='')
                 else:
-                    print("\033[1;34m", end='')
+                    print(BLUE, end='')
                 # Print j itself
                 print(self.solved[i][i].ch + ' ', end='')
                 # Reset the colours
-                print("\033[0;0m", end='')
+                print(RESET, end='')
 
             print('|\n' + '-' * (self.size * 4 + 1))
 
@@ -292,17 +296,17 @@ Here's a conhratulations kitty (it's the same as the pity kitty)
             
     ( Credits to https://ascii.co.uk/art/cats)
         ''')
-        print("\033[0;0m", end='')
+        print(RESET, end='')
         print('-' * (self.size * 4 + 1))
         for i in self.solved:
             for j in i:
                 print('| ', end='')
                 # These weird characters set the colour of the number
-                print("\033[0;32m", end='')
+                print(GREEN, end='')
                 # Print j itself
                 print(j.ch + ' ', end='')
                 # Reset the colours
-                print("\033[0;0m", end='')
+                print(RESET, end='')
 
             print('|\n' + '-' * (self.size * 4 + 1))
 
@@ -351,7 +355,7 @@ Here's a list of commands:
         """
         Start the game
         """
-        for i in range(4):
+        for i in range(32):
             print("-")
             print(CLEAR)
 
