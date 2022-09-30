@@ -1,5 +1,7 @@
 from random import sample, randint
 
+CLEAR = "\033[2J"
+
 class Tile:
     """
     A sudoku tile class
@@ -346,15 +348,20 @@ Here's a list of commands:
 """)
 
     def play(self):
-        clear = "\033[2J"
-        print(clear*4)
+        """
+        Start the game
+        """
+        for i in range(4):
+            print("-")
+            print(CLEAR)
+
         print("""
 Welcome to sudoku! Print help for help
         """)
         while True:
             self.grid.print_board()
             cmd = input(">>>")
-            print(clear)
+            print(CLEAR)
             if cmd.lower().startswith("setboardsize"):
                 self.grid = Grid(int(cmd.split()[1]))
                 self.grid.generate()
