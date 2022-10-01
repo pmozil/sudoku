@@ -284,7 +284,7 @@ class Grid:
         print("\033[1;32m", end='')
         print("""
 Congratulations on finishing the game!
-Here's a conhratulations kitty (it's the same as the pity kitty)
+Here's a congratulations kitty (it's the same as the pity kitty)
 """)
         print(
         '''
