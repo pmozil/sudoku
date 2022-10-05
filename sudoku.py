@@ -381,7 +381,7 @@ Here's a list of commands:
         Start the game
         """
         for i in range(32):
-            print("-")
+            print("You were not supposed to see me")
             print(CLEAR)
 
         print("""
