@@ -129,6 +129,7 @@ class Grid:
         self.size = size
         self.base = int(self.size**0.5)
         self.finished = False
+        self.generate()
 
     def generate(self) -> None:
         """
@@ -360,7 +361,6 @@ class Game:
     """
     def __init__(self):
         self.grid = Grid()
-        self.grid.generate()
 
     def help(self):
         """
