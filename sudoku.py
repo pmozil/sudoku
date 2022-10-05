@@ -10,7 +10,7 @@ class Tile:
     """
     A sudoku tile class
 
-    Attributes
+    Attributes:
     ----------
     preset: bool
         tile is preset, thus unchangeable
@@ -51,7 +51,7 @@ class Tile:
             raise ValueError
         else:
             self.val = val
-            self.ch = ' ' if val==0 else str(val)
+            self.ch = (' ' if max_val < 10 else '  ') if val==0 else str(val)
 
     def toggle_preset(self):
         """
@@ -155,10 +155,7 @@ class Grid:
 
         board = [ [nums[pattern(r,c)] for c in columns] for r in rows]
 
-        for i in range(self.size):
-            for j in range(self.size):
-                self.solved[i][j].set_val(board[i][j])
-                self.solved[i][j].toggle_preset()
+        self.solved = [[Tile(True, j, self.size) for j in i] for i in board]
 
         for i in range(self.size):
             for j in range(self.size):
@@ -226,7 +223,10 @@ class Grid:
         """
         Print the board
         """
-        print('-' * (len(self.solved) * 4 + 1))
+        if self.size < 10:
+            print('\n' + '-' * (self.size * 4 + 1))
+        else:
+            print('\n' + '-' * ((self.size - 9) * 5 + 10))
         for i in self.board:
             for j in i:
                 print('| ', end='')
@@ -238,11 +238,17 @@ class Grid:
                     # Else, make j blue
                     print("\033[0;34m", end='')
                 # Print j itself
-                print(j.ch + ' ', end='')
+                if (j.val < 10 and self.size > 10):
+                    print(' ' + j.ch + ' ', end='')
+                else:
+                    print(j.ch + ' ', end='')
                 # Reset the colours
                 print(RESET, end='')
 
-            print('|\n' + '-' * (self.size * 4 + 1))
+            if self.size < 10:
+                print('|\n' + '-' * (self.size * 4 + 1))
+            else:
+                print('|\n' + '-' * (self.size * 5 + 1))
 
     def print_solved(self) -> None:
         """
@@ -261,7 +267,10 @@ class Grid:
     ( Credits to https://ascii.co.uk/art/cats)
         ''')
         print(RESET, end='')
-        print('-' * (self.size * 4 + 1))
+        if self.size < 10:
+            print('\n' + '-' * (self.size * 4 + 1))
+        else:
+            print('\n' + '-' * ((self.size - 9) * 5 + 10))
         for i in range(self.size):
             for j in range(self.size):
                 print('| ', end='')
@@ -271,11 +280,18 @@ class Grid:
                 else:
                     print(BLUE, end='')
                 # Print j itself
-                print(self.solved[i][i].ch + ' ', end='')
+                cell = self.solved[i][j]
+                if (cell.val < 10 and self.size > 10):
+                    print(' ' + cell.ch + ' ', end='')
+                else:
+                    print(cell.ch + ' ', end='')
                 # Reset the colours
                 print(RESET, end='')
 
-            print('|\n' + '-' * (self.size * 4 + 1))
+            if self.size < 10:
+                print('|\n' + '-' * (self.size * 4 + 1))
+            else:
+                print('|\n' + '-' * (self.size * 5 + 1))
 
     def print_finished(self) -> None:
         """
@@ -297,18 +313,27 @@ Here's a congratulations kitty (it's the same as the pity kitty)
     ( Credits to https://ascii.co.uk/art/cats)
         ''')
         print(RESET, end='')
-        print('-' * (self.size * 4 + 1))
+        if self.size < 10:
+            print('\n' + '-' * (self.size * 4 + 1))
+        else:
+            print('\n' + '-' * ((self.size - 9) * 5 + 10))
         for i in self.solved:
             for j in i:
                 print('| ', end='')
                 # These weird characters set the colour of the number
                 print(GREEN, end='')
                 # Print j itself
-                print(j.ch + ' ', end='')
+                if (j.val < 10 and self.size > 10):
+                    print(' ' + j.ch + ' ', end='')
+                else:
+                    print(j.ch + ' ', end='')
                 # Reset the colours
                 print(RESET, end='')
 
-            print('|\n' + '-' * (self.size * 4 + 1))
+            if self.size < 10:
+                print('|\n' + '-' * (self.size * 4 + 1))
+            else:
+                print('|\n' + '-' * (self.size * 5 + 1))
 
     def is_finished(self) -> bool:
         for i in self.board:
