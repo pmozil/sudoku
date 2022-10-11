@@ -1,0 +1,25 @@
+The game created is sudoku.
+
+To start the game, run
+> $ python sudoku.py
+
+Here's a list of commands:
+    - help
+        { Print help }
+    - setBoardSize size (please use a perfect square for the size)
+        { Set the board size to be size X size }
+    - regenBoard
+        { Regenerate board }
+    - setAtPosition x y value (could also be pos x y value)
+        { Set the (x,y) square's value to val }
+    - printSolution 
+        { Print the solved board }
+    - quit
+        { Quit the game (you can also just Ctrl+C) }
+
+The game consists of three classes:
+    - Tile, the game tile
+    - Grid, the game grid
+    - Game, the UI part
+
+All the documentation of the game is in docstrings
